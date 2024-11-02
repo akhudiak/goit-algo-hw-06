@@ -16,10 +16,10 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        self.check_format(value)
+        self.__check_format(value)
         super().__init__(value)
 
-    def check_format(self, value: str):
+    def __check_format(self, value: str):
 
         if len(value) != 10:
             raise PhoneFormatError("The phone number must be 10 digits long")
