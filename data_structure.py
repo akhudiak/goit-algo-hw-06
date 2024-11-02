@@ -16,9 +16,17 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, value):
-        if len(value) != 10:
-            raise PhoneFormatError()
+        self.check_format(value)
         super().__init__(value)
+
+    def check_format(self, value: str):
+
+        if len(value) != 10:
+            raise PhoneFormatError("The phone number must be 10 digits long")
+        
+        if not value.isdigit():
+            raise PhoneFormatError("The phone number must contain only digits")
+
 
 
 class Record:
@@ -76,7 +84,6 @@ def main():
 
     # Додавання запису John до адресної книги
     book.add_record(john_record)
-    john_record.remove_phone("5555555555")
 
     # Створення та додавання нового запису для Jane
     jane_record = Record("Jane")
